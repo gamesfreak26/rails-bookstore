@@ -1,0 +1,8 @@
+<h1>All the books</h1>
+
+<% @books.each do |book| %>
+    <%= book.name %>
+    <%= book.description %>
+    <%= link_to "See More", book_path(book)%>
+    <br />
+<% end %>

@@ -1,0 +1,23 @@
+<%= form_with model: @book do |form| %>
+
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name %>
+
+    <br />
+
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description, size: "70x5" %>
+
+    <br />
+
+    <%= form.label :price, "Price" %>
+    <%= form.text_field :price %>
+
+    <br />
+
+    <%= form.label :genre, "Genre" %>
+    <%= form.collection_select :genre_id, Genre.order(:name), :id, :name %>
+
+    <%= form.submit "Create Book" %>
+
+<% end %>

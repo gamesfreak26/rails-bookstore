@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[show]
+  before_action :set_book, only: %i[show update]
   before_action :setup_form, only: %i[new edit]
 
   def index
@@ -8,12 +8,21 @@ class BooksController < ApplicationController
 
   def show; end
 
+  def new
+    @book = Book.new
+  end
+
   def create
-    Book.create(books_params)
+    @book = Book.create(books_params)
     redirect_to books_path
   end
 
-  def new; end
+  def edit; end
+
+  def update
+    @book.update(books_params)
+    redirect_to books_path
+  end
 
   private
 
@@ -22,7 +31,7 @@ class BooksController < ApplicationController
   end
 
   def books_params
-    params.require(:books).permit(:name, :description, :price, :genre_id)
+    params.require(:book).permit(:name, :description, :price, :genre_id)
   end
 
   def setup_form

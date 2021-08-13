@@ -8,7 +8,7 @@
 
 genres = [
   { name: 'Science Fiction', description: 'Lots of spaceships' },
-  { name: 'Fantasty', description: 'Wizards and things' },
+  { name: 'Fantasy', description: 'Wizards and things' },
   { name: 'Non-Fiction', description: 'Most of the boring stuff' },
   { name: 'Self-Improvement', description: 'how to get better at life' }
 ]
@@ -20,9 +20,9 @@ if Genre.count.zero?
   end
 end
 
-if Book.count.zero?
-  5.times do
-    Book.create(name: Faker::Books::CultureSeries.book, description: Faker::Fantasy::Tolkien.poem, price: 4, genre_id: 1)
-    p "Created book"
-  end
-end
+# if Book.count.zero?
+#   5.times do
+#     Book.create(name: Faker::Books::CultureSeries.book, description: Faker::Fantasy::Tolkien.poem, price: 4, genre_id: 1)
+#     p "Created book"
+#   end
+# end

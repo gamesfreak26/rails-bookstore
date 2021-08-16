@@ -31,6 +31,12 @@
     <%= form.collection_select :genre_id, @genres, :id, :name %>
   </div>
 
+  <div class="field">
+    <%= form.label :author %>
+    <%= form.collection_select(:author_ids, @authors, :id, :name, {}, {multiple: true}) %>
+    <%# <%= select_tag "Authors", options_from_collection_for_select(@authors, "id", "name") %> 
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

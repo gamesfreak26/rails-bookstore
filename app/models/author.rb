@@ -4,4 +4,5 @@ class Author < ApplicationRecord
 
     validates :name, presence: true
     validates :biography, length: {maximum: 250, too_long: "Max. 250 characters allowed"}
+
 end

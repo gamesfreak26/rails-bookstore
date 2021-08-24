@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
   before_action :setup_form, only: %i[edit new]
+  before_action :book_params, only: [:create, :update]
 
   # GET /books or /books.json
   def index
@@ -23,7 +24,6 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
-    # @book.build_author
 
     respond_to do |format|
       if @book.save

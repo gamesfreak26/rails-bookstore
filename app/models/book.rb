@@ -11,4 +11,5 @@ class Book < ApplicationRecord
   validates :description, length: {maximum: 250, too_long: "must have at most %{count} words"}
 
   scope :search_by_name, ->(search) { where('name ILIKE ?', "%#{search}%") }
+  scope :search_by_author, ->(search) { joins(:authors).merge(Author.where('authors.name ILIKE ?', "%#{search}%"))}
 end

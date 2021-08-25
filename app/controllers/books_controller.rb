@@ -24,7 +24,7 @@ class BooksController < ApplicationController
 
   # POST /books or /books.json
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.new(book_params)
 
     respond_to do |format|
       if @book.save
@@ -53,6 +53,7 @@ class BooksController < ApplicationController
   # DELETE /books/1 or /books/1.json
   def destroy
     @book.destroy
+    # @book.destroy
     redirect_to books_url
   end
 
@@ -60,6 +61,7 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      # @authors = @book.authors
     end
 
     # Only allow a list of trusted parameters through.

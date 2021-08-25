@@ -19,7 +19,7 @@
   <%= link_to 'Show', book %>
   
   
-  <% if current_user.admin? %>
+  <% if current_user && current_user.admin? %>
     <%= link_to 'Edit', edit_book_path(book) %>
     <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% elsif current_user && current_user.id == book.user_id %>

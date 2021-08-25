@@ -11,6 +11,8 @@ class BooksController < ApplicationController
       @books = Book.search_by_name(params[:search][:name])
     elsif params[:search] && params[:search][:search_type] == "author"
       @books = Book.search_by_author(params[:search][:name])
+    # elsif params[:search] && params[:search][:search_type] == "genre"
+    #   @books = Book.search_by_genre(params[:search][:name])
     else
       @books = Book.all
     end

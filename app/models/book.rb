@@ -12,4 +12,10 @@ class Book < ApplicationRecord
 
   scope :search_by_name, ->(search) { where('name ILIKE ?', "%#{search}%") }
   scope :search_by_author, ->(search) { joins(:authors).merge(Author.where('authors.name ILIKE ?', "%#{search}%"))}
+  
+  # scope :search_by_genre, ->(search) { 
+  #   genres = Genre.where(name: search).pluck(:id)
+  #   p "GENRES: #{genres}"
+  #   where('genre_id ILIKE ?', "%#{genres}#") 
+  # }
 end

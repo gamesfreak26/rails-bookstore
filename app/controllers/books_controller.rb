@@ -4,9 +4,14 @@ class BooksController < ApplicationController
   before_action :book_params, only: %i[create update]
   before_action :authenticate_user!, except: %i[index show]
 
+
   # GET /books or /books.json
   def index
-    @books = Book.search_by_name(params[:search][:name])
+    if params[:search]
+      @books = Book.search_by_name(params[:search][:name])
+    else
+      @books = Book.all
+    end
   end
 
   # GET /books/1 or /books/1.json

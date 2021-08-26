@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Books</h1>
 
@@ -27,6 +27,12 @@
     <%= link_to 'Edit', edit_book_path(book) %>
   <% end %>
   <br>
+
+  <%= form_with model: @order_item do |form| %>
+    <%= form.hidden_field :book_id, value: book.id %>
+    <%= form.number_field :quantity, value: 1, min: 1 %>
+    <%= form.submit "Add to Cart" %>
+  <% end %>
 <% end %>
 
 <br>

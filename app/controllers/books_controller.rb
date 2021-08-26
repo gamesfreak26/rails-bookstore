@@ -14,6 +14,9 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
+
+    @order_item = current_order.order_items.new
+
   end
 
   # GET /books/1 or /books/1.json

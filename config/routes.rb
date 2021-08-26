@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # get 'order_items/create'
+  # get 'order_items/update'
+  # get 'order_items/destroy'
+  resources :order_items
+  get 'cart', to: 'cart#show'
   devise_for :users
   resources :authors
   resources :books

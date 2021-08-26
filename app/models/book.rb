@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   has_many :authors, through: :author_books
   accepts_nested_attributes_for :author_books
   belongs_to :user
+
+  has_many :order_items
   
   validates :name, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }

@@ -1,34 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Books</h1>
+<main id="books-index">
 
-<h3>Search Books</h3>
+  <h1>Books</h1>
 
-<h4>Search Books by title</h4>
-<%= form_with(scope: :search, url: books_path, method: 'get', local: true) do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.select :search_type, ['book', 'author', 'genre'] %>
-  <%= form.submit 'Search'  %>
-<% end %>
+  <div id="books-search">
+    <h3>Search Books</h3>
+    <%= form_with(scope: :search, url: books_path, method: 'get', local: true) do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+      <%= form.select :search_type, ['book', 'author', 'genre'] %>
+      <%= form.submit 'Search'  %>
+    <% end %>
+  </div>
 
-<% @books.each do |book| %>
-  <%= book.name %>
-  <%= book.description %>
-  <%= book.price %>
-  <%= book.genre_id %>
-  <%= link_to 'Show', book %>
-  
-  
-  <% if current_user && current_user.admin? %>
-    <%= link_to 'Edit', edit_book_path(book) %>
-    <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% elsif current_user && current_user.id == book.user_id %>
-    <%= link_to 'Edit', edit_book_path(book) %>
-  <% end %>
+  <div class="container">
+    <% @books.each do |book| %>
+      <div class="card">
+        <h2><%= book.name %></h2>
+        <p><%= book.description %></p>
+        <p>$<%= book.price %></p>
+        <%= link_to 'Show', book %>
+        
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Edit', edit_book_path(book) %>
+          <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% elsif current_user && current_user.id == book.user_id %>
+          <%= link_to 'Edit', edit_book_path(book) %>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+
   <br>
-<% end %>
 
-<br>
+  <%= link_to 'New Book', new_book_path %>
 
-<%= link_to 'New Book', new_book_path %>
+</main>

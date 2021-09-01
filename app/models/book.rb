@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  include Searchable
+
   belongs_to :genre
   has_many :author_books, dependent: :destroy
   has_many :authors, through: :author_books
@@ -14,4 +16,6 @@ class Book < ApplicationRecord
 
   scope :search_by_name, ->(search) { where('name ILIKE ?', "%#{search}%") }
   scope :search_by_author, ->(search) { joins(:authors).merge(Author.where('authors.name ILIKE ?', "%#{search}%"))}
+  # scope :search_by_genre, ->(search) { Book.merge(:genres).where('genre.name ILIKE ?', "%#{search}%").references(:genre) }
+  scope :search_by_genre, -> (genre) { where(genre_id: genre) }
 end

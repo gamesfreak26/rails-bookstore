@@ -1,3 +1,23 @@
 // Place all the styles related to the books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#books-index {
+    #books-search {
+        padding: 20px 20px;
+        text-align: center;
+    }
+
+    .container {
+        display:flex;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .card {
+        border: 2px solid black;
+        padding: 7px 7px;
+        margin: 5px 5px;
+        width: 20%;
+    }
+}

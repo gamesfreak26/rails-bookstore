@@ -9,7 +9,13 @@
     <%= form_with(scope: :search, url: books_path, method: 'get', local: true) do |form| %>
       <%= form.label :name %>
       <%= form.text_field :name %>
-      <%= form.select :search_type, ['book', 'author', 'genre'] %>
+      
+      <%= form.label :author %>
+      <%= form.text_field :author %>
+
+      <%= form.label :genre %>
+      <%= form.collection_select :genre, Genre.all, :id, :name, :include_blank => true %>
+
       <%= form.submit 'Search'  %>
     <% end %>
   </div>

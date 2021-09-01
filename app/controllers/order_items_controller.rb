@@ -19,6 +19,7 @@ class OrderItemsController < ApplicationController
     p @order_item
     @order_item.destroy
     @order_items = current_order.order_items
+    redirect_to cart_path
   end
 
   private

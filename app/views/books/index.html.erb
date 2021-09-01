@@ -1,40 +1,54 @@
+<main id="books-index">
 
+  <h1>Books</h1>
 
-<h1>Books</h1>
+  <section id="books-search">
+    <h3>Search Books</h3>
 
-<h3>Search Books</h3>
+    <%= form_with(scope: :search, url: books_path, method: 'get', local: true) do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
 
-<h4>Search Books by title</h4>
-<%= form_with(scope: :search, url: books_path, method: 'get', local: true) do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.select :search_type, ['book', 'author', 'genre'] %>
-  <%= form.submit 'Search'  %>
-<% end %>
+      <%= form.label :author %>
+      <%= form.text_field :author %>
 
-<% @books.each do |book| %>
-  <%= book.name %>
-  <%= book.description %>
-  <%= book.price %>
-  <%= book.genre_id %>
-  <%= link_to 'Show', book %>
-  
-  
-  <% if current_user && current_user.admin? %>
-    <%= link_to 'Edit', edit_book_path(book) %>
-    <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% elsif current_user && current_user.id == book.user_id %>
-    <%= link_to 'Edit', edit_book_path(book) %>
-  <% end %>
+      <%= form.label :genre %>
+      <%= form.collection_select :genre, Genre.all, :id, :name, :include_blank => true %>
+      
+      <%= form.submit 'Search'  %>
+    <% end %>
+  </section>
+
+  <section class="container">
+    <% @books.each do |book| %>
+      <div class="card">
+        <h3><%= book.name %></h3>
+        <br />
+        <p><%= book.description %></p>
+        <br />
+        <p>Price: <%= book.price %></p>
+        
+        
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Edit', edit_book_path(book) %>
+          <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% elsif current_user && current_user.id == book.user_id %>
+          <%= link_to 'Edit', edit_book_path(book) %>
+        <% end %>
+        <br>
+
+        <% if current_user %>
+          <%= form_with model: @order_item do |form| %>
+            <%= form.hidden_field :book_id, value: book.id %>
+            <%= form.number_field :quantity, value: 1, min: 1 %>
+            <%= form.submit "Add to Cart" %>
+          <% end %>
+        <% end %>
+
+        <br />
+        <%= link_to 'Go to Book', book %>
+      </div>
+    <% end %>
+  </section>
   <br>
-
-  <%= form_with model: @order_item do |form| %>
-    <%= form.hidden_field :book_id, value: book.id %>
-    <%= form.number_field :quantity, value: 1, min: 1 %>
-    <%= form.submit "Add to Cart" %>
-  <% end %>
-<% end %>
-
-<br>
-
-<%= link_to 'New Book', new_book_path %>
+</main>

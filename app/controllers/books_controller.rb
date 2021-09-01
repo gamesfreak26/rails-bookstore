@@ -7,12 +7,8 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    if params[:search] && params[:search][:search_type] == "book"
-      @books = Book.search_by_name(params[:search][:name])
-    elsif params[:search] && params[:search][:search_type] == "author"
-      @books = Book.search_by_author(params[:search][:name])
-    # elsif params[:search] && params[:search][:search_type] == "genre"
-    #   @books = Book.search_by_genre(params[:search][:name])
+    if params[:search].present?
+      @books = Book.search_by(search_params)
     else
       @books = Book.all
     end
@@ -81,5 +77,9 @@ class BooksController < ApplicationController
     def setup_form
       @genres = Genre.all
       @authors = Author.all.order(:name)
+    end
+
+    def search_params
+      params.require(:search).permit(:name, :author, :genre)
     end
 end

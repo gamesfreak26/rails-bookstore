@@ -36,9 +36,9 @@ if Author.count.zero?
   end
 end
 
-if Book.count.zero?
-  5.times do
-    Book.create(name: Faker::Books::CultureSeries.book, description: Faker::Fantasy::Tolkien.poem, price: 4, genre_id: Faker::Number.between(from: 1, to: 4), author_ids: [Faker::Number.between(from: 1, to: 6), Faker::Number.between(from: 1, to: 6)])
-    p "Created book"
-  end
-end
+# if Book.count.zero?
+#   5.times do
+#     Book.create(title: Faker::Books::CultureSeries.book, description: Faker::Fantasy::Tolkien.poem, price: 4, genre_id: Faker::Number.between(from: 1, to: 4), author_ids: [Faker::Number.between(from: 1, to: 6), Faker::Number.between(from: 1, to: 6)])
+#     p "Created book"
+#   end
+# end

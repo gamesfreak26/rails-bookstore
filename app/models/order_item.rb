@@ -7,15 +7,16 @@ class OrderItem < ApplicationRecord
 
   def to_builder
     Jbuilder.new do |book|
-      book.amount unit_price.to_i
-      book.quantity 1
+      book.amount unit_price.to_i *100
+      book.quantity quantity
+      book.currency "aud"
     end
   end
 
-  after_create do
-    product = Stripe::Product.create(name: name)
-    price = Stripe::Price.create(product: product, unit_amount: self.price, currency: self.currency)
-  end
+  # after_create do
+  #   product = Stripe::Product.create(name: name)
+  #   price = Stripe::Price.create(product: product, unit_amount: self.price, currency: self.currency)
+  # end
 
   def unit_price
     if persisted?

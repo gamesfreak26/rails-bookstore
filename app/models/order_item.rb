@@ -6,15 +6,19 @@ class OrderItem < ApplicationRecord
   before_save :set_total
 
   def to_builder
-    Jbuilder.new do |book|
-      book.amount unit_price.to_i *100
-      book.quantity quantity
-      book.currency "aud"
+    Jbuilder.new do |order_item|
+      # p "order_item: #{book_id}"
+      # book_id = order_item.book_id
+      # book = Book.find(book_id)
+      order_item.name "name"
+      order_item.amount unit_price.to_i * 100
+      order_item.quantity quantity
+      order_item.currency "aud"
     end
   end
 
   # after_create do
-  #   product = Stripe::Product.create(name: name)
+  #   product = Stripe::Book.create(title: name)
   #   price = Stripe::Price.create(product: product, unit_amount: self.price, currency: self.currency)
   # end
 

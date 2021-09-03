@@ -15,8 +15,26 @@
 
 <h3>Your current order has a total of: <%= current_order.subtotal %></h3>
 
-<%= link_to "Buy items", checkout_create_path %>
+<% if current_user %>
+    <button data-stripe="payment" class='btn btn-primary p-3'> Buy: $<%=current_order.subtotal%></button>
+<% end %>
 
 <br />
 
 <%= link_to "Back to Shopping Cart", cart_path %>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const button = document.querySelector("[data-stripe='payment']")
+  if (button) {
+    button.addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      )
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      })
+    })
+  }
+</script>

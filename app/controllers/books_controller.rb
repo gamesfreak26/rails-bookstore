@@ -84,6 +84,6 @@ class BooksController < ApplicationController
     end
 
     def search_params
-      params.require(:search).permit(:title, :author, :genre)
+      params.require(:search).permit(:title, :author, :genre, :picture)
     end
 end

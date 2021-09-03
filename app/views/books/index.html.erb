@@ -24,6 +24,12 @@
       <div class="card">
         <h3><%= book.title %></h3>
         <br />
+        <% if book.picture.attached? %>
+          <%= image_tag book.picture, class: "card-img top thumbnail" %>
+        <% else %>
+          <%= image_tag "book.jpg", alt: "books in bookcase", class: "card-img top thumbnail" %>
+        <% end %>
+        <br />
         <p><%= book.description %></p>
         <br />
         <p>Price: <%= book.price %></p>
@@ -50,5 +56,5 @@
       </div>
     <% end %>
   </section>
-  <br>
+  <br />
 </main>

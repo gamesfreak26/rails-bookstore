@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post 'payments/webhook'
+  get 'payments/success'
   # get 'order_items/create'
   # get 'order_items/update'
   # get 'order_items/destroy'
